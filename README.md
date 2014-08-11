@@ -12,7 +12,12 @@ Meta-analysis has become a popular approach for high-throughput genomic data ana
 
 <a name="download"/>
 # Download and install #
-You can install DupChecker package in R from [github](https://github.com/shengqh/DupChecker/) by following codes:
+You can install DupChecker package in R from [Bioconductor]("http://bioconductor.org/packages/devel/bioc/html/DupChecker.html") by following codes:
+
+  source("http://bioconductor.org/biocLite.R")
+  biocLite("DupChecker")
+
+or from [github](https://github.com/shengqh/DupChecker/) by following codes:
 
 	# install.packages("devtools")
 	devtools::install_github("shengqh/DupChecker")
@@ -24,7 +29,7 @@ Here we show the most basic steps for a validation procedure. You need to create
 
 	library(DupChecker)
 	geoDownload(datasets = c("GSE14333", "GSE13067", "GSE17538"), targetDir=getwd())
-	datafile<-buildFileTable(rootDir=getwd())
+	datafile<-buildFileTable(rootDir=getwd(), filePattern="cel$")
 	result<-validateFile(datafile)
 	if(result$hasdup){
   		duptable<-result$duptable
@@ -65,10 +70,10 @@ Secondly, function buildFileTable will try to find all files in the subdirectori
 under root directories user provided. The result data frame contains two columns, 
 dataset and filename. Here, rootDir can also be an array of directories. 
 
-	datafile<-buildFileTable(rootDir=getwd())
+	datafile<-buildFileTable(rootDir=getwd(), filePattern="cel$")
 	datafile
 
-##Validate CEL file redundancy
+##Validate file redundancy
 
 The function validateFile will calculate MD5 fingerprint for each file in table and 
 then check to see if any two files have same MD5 fingerprint. The files with same 

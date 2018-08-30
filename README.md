@@ -20,8 +20,9 @@ You can install DupChecker package in R from [github](https://github.com/shengqh
   
 or from [Bioconductor](http://bioconductor.org/packages/devel/bioc/html/DupChecker.html) by following codes:
 
-	source("http://bioconductor.org/biocLite.R")
-	biocLite("DupChecker")
+	if (!requireNamespace("BiocManager", quietly=TRUE))
+    	install.packages("BiocManager")
+	BiocManager::install("DupChecker")
   
 <a name="example"/>
 # Quick start
